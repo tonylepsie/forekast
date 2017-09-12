@@ -1,4 +1,4 @@
-module.exports = {
+var cities = {
   Paris: {
     temp: 21,
     icon: 'sunny.jpg',
@@ -8,3 +8,5 @@ module.exports = {
     icon: 'cloudy.jpg',
   }
 }
+
+export default cities;

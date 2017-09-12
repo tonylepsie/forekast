@@ -5,6 +5,7 @@ var browserify = require('browserify');
 var babelify = require('babelify');
 var watchify = require('watchify');
 var notify = require('gulp-notify');
+var sourcemaps = require('gulp-sourcemaps')
 
 var autoprefixer = require('gulp-autoprefixer');
 var uglify = require('gulp-uglify');
@@ -90,24 +91,23 @@ gulp.task('watchify', function () {
   bundler.on('update', function () {
     bundle_js(bundler);
   })
-})
+});
 
 
 function bundle_js(bundler) {
   return bundler.bundle()
     .on('error', handleErrors)
     .pipe(source(conf.scriptsPath+'main.js'))
-    .pipe(gulp.dest(conf.buildPath))
     .pipe(buffer())
-    .pipe(uglify())
-    .pipe(rename({suffix: '.min'}))
-    //.pipe(sourcemaps.init({ loadMaps: true }))
-      // capture sourcemaps from transforms
-      //.pipe(uglify())
-    //.pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(conf.buildPath))
+    //.pipe(rename('main.min.js'))
+    //.pipe(sourcemaps.init({ loadMaps: true }))
+    //.pipe(uglify())
+    //.pipe(sourcemaps.write('.'))
+    //.pipe(gulp.dest(conf.buildPath))
     .pipe(reload({stream:true}))
 }
+
 
 
 function handleErrors() {
@@ -120,8 +120,7 @@ function handleErrors() {
 }
 
 
-
 gulp.task('default', ['images','styles','browser-sync', 'watchify'], function() {
-  gulp.watch(conf.scssPath+'*.scss', ['styles']).on('change', browserSync.reload); // gulp watch for stylus changes
-  gulp.watch(conf.scriptsPath+'*.js', ['watchify']).on('change', browserSync.reload);
+  gulp.watch(conf.scssPath+'*.scss', ['styles']); // gulp watch for stylus changes
+  gulp.watch(conf.scriptsPath+'*.js', ['watchify']);
 });
