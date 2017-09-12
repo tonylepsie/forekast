@@ -414,3 +414,10 @@ h1 {
   font-family: Futura, Helvetica;
   font-weight: 100;
 }
+
+.forekastLoader {
+  width: 20%;
+  position: absolute;
+  top: 50%;
+  left: 40%;
+}

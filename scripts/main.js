@@ -1,11 +1,9 @@
 import React from 'react';
-var ReactDOM = require('react-dom');
+import ReactDOM from 'react-dom';
 
-var ReactRouter = require('react-router');
-var Router  = ReactRouter.Router;
-var Route = ReactRouter.Route;
-var History = ReactRouter.History;
-var createBrowserHistory = require('history/lib/createBrowserHistory');
+//import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+//var History = ReactRouter.History;
+//var createBrowserHistory = require('history/lib/createBrowserHistory');
 
 
 import Skycons from 'react-skycons';
@@ -17,20 +15,14 @@ var Forekast = React.createClass({
       cities: {}
     }
   },
-  loadCities: function() {
-    this.setState({
-      cities : require('../samples/cities')
-    });
-  },
-  addCity: function() {
-    return;
-  },
+
   render : function() {
 
-    //test = new Skycons({"color": "red"});
     return (
       <div className="forekast">
-        <h1>Forekast !</h1>
+        <div className="forekastLoader">
+          <Skycons color='white' icon='RAIN' autoplay={true}/>
+        </div>
       </div>
     )
   }
@@ -48,10 +40,5 @@ var CityList = React.createClass({
 })
 
 
-var routes = (
-  <Router history={createBrowserHistory()}>
-    <Route path="/" component={Forekast}/>
-  </Router>
-)
 
-ReactDOM.render(routes, document.querySelector('#main'));
+ReactDOM.render(React.createElement(Forekast), document.querySelector('#main'));
