@@ -2,7 +2,14 @@
 ~ Main
 ------------------------------------------------------------------------*/
 
+@import "neat";
 @import "base/_normalize.scss";
+
+
+$neat-grid: (
+  columns: 12,
+  gutter: 2rem,
+);
 
 
 html {
@@ -10,22 +17,68 @@ html {
 }
 
 body {
-  background: #2980b9;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to bottom, #2c3e50, #2980b9);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom, #2c3e50, #2980b9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-  color: white;
-
+  background: #4CA1AF;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #C4E0E5, #4CA1AF);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #C4E0E5, #4CA1AF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #fff;
+  font-family: 'Oxygen', sans-serif;
+  font-size: 62.5%;
 }
 
 h1 {
   text-align: center;
-  font-family: Futura, Helvetica;
   font-weight: 100;
 }
 
 
+#main {
+  //max-width: 1200px;
+  @include grid-container;
+}
+
+
+.weather-now {
+  /*display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  */
+  @include grid-push(3);
+  @include grid-column(6);
+
+  margin-top: 5rem;
+
+  .weather-now__city {
+    text-align: center;
+    font-size: 25px;
+    text-transform: uppercase;
+    width: 100%;
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+  }
+
+  .weather-now__icon-wrapper {
+    width: 50%;
+
+    canvas {
+      width: 15rem !important;
+      float: right;
+    }
+  }
+  .weather-now__wrapper {
+    width: 50%;
+  }
+  .weather-now__temperature {
+    align-self: center;
+    font-size: 2rem;
+  }
+}
+
+
+
+
+
 .forekastLoader {
+
   width: 20%;
   position: absolute;
   top:50%;
@@ -33,5 +86,15 @@ h1 {
 
   canvas {
 
+  }
+}
+
+
+.weatherInfos {
+  @include grid-push(3);
+  @include grid-column(6);
+  text-align: center;
+  ul {
+    list-style-type: none;
   }
 }

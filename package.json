@@ -1,7 +1,7 @@
 {
-  "name": "Metronom.io",
+  "name": "Forekast",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple forecast app using React",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,6 +9,7 @@
   "author": "Anthony Ksiezniak",
   "license": "ISC",
   "devDependencies": {
+    "axios": "^0.16.2",
     "babel": "latest",
     "babel-preset-es2015": "latest",
     "babel-preset-react": "latest",
@@ -16,6 +17,7 @@
     "browser-sync": "2.18.13",
     "browserify": "11.2.0",
     "connect-history-api-fallback": "1.1.0",
+    "dark-sky-api": "^0.6.21",
     "gulp": "3.9.1",
     "gulp-autoprefixer": "3.1.0",
     "gulp-clean-css": "latest",
@@ -29,6 +31,8 @@
     "gulp-uglify": "1.4.2",
     "gulp-util": "3.0.7",
     "history": "1.12.5",
+    "neat": "^1.2.2",
+    "node-neat": "^2.0.0-beta.0",
     "react": "15.6.1",
     "react-catalyst": "0.3.0",
     "react-dom": "15.6.1",
