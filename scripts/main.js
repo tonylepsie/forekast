@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Skycons from 'react-skycons';
 import DarkSkyApi from 'dark-sky-api';
 import axios from 'axios';
 import moment from 'moment';
@@ -13,16 +12,20 @@ DarkSkyApi.language = 'fr'; // default 'en'
 
 moment.locale('fr');
 
-const directionsFr = {
-  "N": "Nord",
-  "S": "Sud",
-  "E": "Est",
-  "W": "Ouest",
-  "NE": "Nord ouest",
-  "NW": "Nord est",
-  "SE": "Sud est",
-  "SW": "Sud ouest",
-};
+const params = {
+  lang : 'fr',
+  directionsFr: {
+    "N": "Nord",
+    "S": "Sud",
+    "E": "Est",
+    "W": "Ouest",
+    "NE": "Nord ouest",
+    "NW": "Nord est",
+    "SE": "Sud est",
+    "SW": "Sud ouest",
+  },
+  iconPath: 'build/images/icons/'
+}
 
 
 
@@ -138,7 +141,6 @@ var Forekast = React.createClass({
   geoError: function(args) {
     console.log(args);
   },
-
   render : function() {
 
     return (
@@ -149,7 +151,7 @@ var Forekast = React.createClass({
         <div className="forekast">
           <LoadingScreen isLoading={this.state.isLoading} />
           <UnitToggle tempUnit={this.state.tempUnit} isLoading={this.state.isLoading} selectUnit={this.selectUnit} />
-          <NowForekast weatherData={this.state.weatherData}  tempUnit={this.state.tempUnit} isLoading={this.state.isLoading} city={this.state.city} />
+          <NowForekast weatherData={this.state.weatherData} tempUnit={this.state.tempUnit} isLoading={this.state.isLoading} city={this.state.city} />
           <WeatherInfos weatherData={this.state.weatherData}  tempUnit={this.state.tempUnit} isLoading={this.state.isLoading} />
           <HoursForekast weatherData={this.state.weatherData} tempUnit={this.state.tempUnit} isLoading={this.state.isLoading}  />
 
@@ -169,7 +171,7 @@ var LoadingScreen = React.createClass({
     if (isLoading) {
       return (
           <div className="forekastLoader">
-            <img src="build/images/813.gif" />
+            <img src="build/images/loading.gif" />
           </div>
       )
     } else return null;
@@ -203,6 +205,7 @@ var UnitToggle = React.createClass({
 })
 
 var NowForekast = React.createClass({
+
   render : function() {
 
     var isLoading = this.props.isLoading;
@@ -217,7 +220,7 @@ var NowForekast = React.createClass({
             <div className="weather-now__summary">{data.currently.summary}</div>
 
             <div className="weather-now__icon-wrapper">
-              <Skycons color='white' icon={h.transformIconName(data.currently.icon)} autoplay={true} width="150" height="150" style={{height: 'auto'}, {width: 'auto'}}  />
+              <img src={params.iconPath+data.currently.icon+".svg"} />
             </div>
             <div className="weather-now__wrapper">
               <div className="weather-now__temperature">{Math.round(data.currently.temperature)}<sup>°</sup></div>
@@ -236,21 +239,27 @@ var NowForekast = React.createClass({
 
 var HoursForekast = React.createClass({
 
-  renderHour: function(hour, index) {
-    var maxHours = 12;
+  renderHour: function(hourData, index) {
+    var maxHours = 20;
+
+    var hour = new Date();
+    hour.setTime(hourData.time*1000);
+
+    if (index > maxHours) return;
 
     return(
-      <div key={index}>
+      <li key={'day-'+index}>
+        <div className="hour">{h.hoursClean(hour.getHours())}</div>
+        <img src={params.iconPath+hourData.icon+".svg"} />
 
-
-
-      </div>
+        <div className="temp">{Math.round(hourData.temperature)}°</div>
+      </li>
     )
   },
 
   render: function() {
     var isLoading = this.props.isLoading;
-    let hourlyData = this.props.weatherData.hourly;
+    var hourlyData = this.props.weatherData.hourly;
     if (!isLoading) {
 
       return (
@@ -261,7 +270,7 @@ var HoursForekast = React.createClass({
           <div className="weather-by-hours__list">
 
             <ul>
-              {/*hourlyData.data.map(this.renderHour)*/}
+              {hourlyData.data.map(this.renderHour)}
             </ul>
           </div>
         </section>
@@ -273,12 +282,12 @@ var HoursForekast = React.createClass({
 
 var DaysForekast = React.createClass({
   renderDay: function (day, index) {
-    let canvasSize = 35;
-    let maxDays = 10;
+    var canvasSize = 35;
+    var maxDays = 10;
     if (index === 0 || index > maxDays) return;
     return(
       <li key={'day-'+index}>
-        <div><Skycons color='white' icon={h.transformIconName(day.icon)} autoplay={false} width={canvasSize} height={canvasSize} style={{height: 'auto'}, {width: 'auto'}}  /></div>
+        <img src={params.iconPath+day.icon+".svg"} />
         <div>{h.capsFirstLetter(day.dateTime.format('dddd'))}</div>
         <div>
           <span className="temp-min">{Math.round(day.temperatureMin)}°</span> | <span className="temp-max">{Math.round(day.temperatureMax)}°</span>
@@ -340,7 +349,7 @@ var WeatherInfos = React.createClass({
             </div>
 
             <div className="group">
-              <div>Direction du vent :</div><div><span className="wind-direction" data-direction={data.currently.windDirection} >{directionsFr[data.currently.windDirection]}</span></div>
+              <div>Direction du vent :</div><div><span className="wind-direction" data-direction={data.currently.windDirection} >{params.directionsFr[data.currently.windDirection]}</span></div>
               <div>Vitesse du vent :</div><div>{data.currently.windSpeed} km/h</div>
             </div>
 

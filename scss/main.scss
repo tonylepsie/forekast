@@ -5,6 +5,11 @@
 @import "neat";
 @import "base/_normalize.scss";
 
+$neat-grid: (
+  columns: 12,
+  gutter: 0,
+);
+
 * {
 	box-sizing: border-box;
 }
@@ -66,11 +71,6 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0;
 }
 
-$neat-grid: (
-  columns: 12,
-  gutter: 0,
-);
-
 
 html {
   height: 100%;
@@ -90,11 +90,18 @@ h1 {
   font-weight: 100;
 }
 
+.hidden {
+	display: none;
+}
+
+
 //colors
 $lightgrey: #ccc;
 
 
-
+.imgshadow {
+	filter: drop-shadow(1px 1px 1px rgba(51,51,51,.4));
+}
 
 
 #main {
@@ -228,6 +235,12 @@ section {
     @include grid-column(6 of 12);
 		height: 10rem;
 
+		img {
+			float: right;
+			width: 9rem;
+			@extend .imgshadow;
+		}
+
     canvas {
       //width: 80% !important;
       float: right;
@@ -271,6 +284,42 @@ section {
 	padding: 0 .7rem;
 }
 
+.weather-by-hours__list {
+	padding-top: 1rem;
+	width: 100%;
+  overflow-x: scroll;
+  overflow-y: auto;
+
+	&::-webkit-scrollbar {
+	    display: none;
+	}
+
+	ul {
+		list-style-type: none;
+		white-space: nowrap;
+	}
+
+	li {
+		width: 12%;
+		display: inline-block;
+		text-align: center;
+		padding-bottom: 3px;
+		img {
+			width: 1.8rem;
+			@extend .imgshadow;
+			padding: 5px 0;
+		}
+		div {
+			padding-top: .3rem;
+			font-size: .7rem;
+			.temp-min {
+				color: $lightgrey;
+			}
+		}
+	}
+}
+
+
 .weather-by-days_list {
 	padding-top: 1rem;
 	width: 100%;
@@ -287,16 +336,21 @@ section {
 	}
 
 	li {
-			width: 22.2%;
-			display: inline-block;
-			text-align: center;
-			div {
-				padding-top: .3rem;
-				font-size: .7rem;
-				.temp-min {
-					color: $lightgrey;
-				}
+		width: 22.2%;
+		display: inline-block;
+		text-align: center;
+		img {
+			width: 1.8rem;
+			@extend .imgshadow;
+			padding: 5px 0;
+		}
+		div {
+			padding-top: .3rem;
+			font-size: .7rem;
+			.temp-min {
+				color: $lightgrey;
 			}
+		}
 	}
 }
 

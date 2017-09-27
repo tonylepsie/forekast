@@ -50,8 +50,8 @@ const conf = {
 */
 
 gulp.task('styles',function() {
+  
   // move over fonts
-
   gulp.src('assets/fonts/**.*')
     .pipe(gulp.dest(conf.buildPath+'fonts'))
 

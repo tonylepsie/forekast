@@ -481,6 +481,15 @@ h1 {
   font-weight: 100;
 }
 
+.hidden {
+  display: none;
+}
+
+.imgshadow, .weather-now .weather-now__icon-wrapper img, .weather-by-hours__list li img, .weather-by-days_list li img {
+  -webkit-filter: drop-shadow(1px 1px 1px rgba(51, 51, 51, 0.4));
+          filter: drop-shadow(1px 1px 1px rgba(51, 51, 51, 0.4));
+}
+
 #main {
   height: 100%;
 }
@@ -617,6 +626,11 @@ section h2 span.today-min {
   height: 10rem;
 }
 
+.weather-now .weather-now__icon-wrapper img {
+  float: right;
+  width: 9rem;
+}
+
 .weather-now .weather-now__icon-wrapper canvas {
   float: right;
 }
@@ -669,6 +683,43 @@ section h2 span.today-min {
   padding: 0 .7rem;
 }
 
+.weather-by-hours__list {
+  padding-top: 1rem;
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: auto;
+}
+
+.weather-by-hours__list::-webkit-scrollbar {
+  display: none;
+}
+
+.weather-by-hours__list ul {
+  list-style-type: none;
+  white-space: nowrap;
+}
+
+.weather-by-hours__list li {
+  width: 12%;
+  display: inline-block;
+  text-align: center;
+  padding-bottom: 3px;
+}
+
+.weather-by-hours__list li img {
+  width: 1.8rem;
+  padding: 5px 0;
+}
+
+.weather-by-hours__list li div {
+  padding-top: .3rem;
+  font-size: .7rem;
+}
+
+.weather-by-hours__list li div .temp-min {
+  color: #ccc;
+}
+
 .weather-by-days_list {
   padding-top: 1rem;
   width: 100%;
@@ -689,6 +740,11 @@ section h2 span.today-min {
   width: 22.2%;
   display: inline-block;
   text-align: center;
+}
+
+.weather-by-days_list li img {
+  width: 1.8rem;
+  padding: 5px 0;
 }
 
 .weather-by-days_list li div {
