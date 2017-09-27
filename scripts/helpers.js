@@ -17,6 +17,15 @@ let helpers =  {
       case 'F':
         break;
     }
+  },
+  transformIconName: function(icon) {
+    return this.replaceAll(icon.toUpperCase(),'-','_');
+  },
+  capsFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  },
+  replaceAll(target, search, replacement) {
+      return target.replace(new RegExp(search, 'g'), replacement);
   }
 }
 
