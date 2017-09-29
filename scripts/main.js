@@ -141,6 +141,16 @@ var Forekast = React.createClass({
   geoError: function(args) {
     console.log(args);
   },
+  displayTemp: function(temp) {
+    if (this.state.tempUnit === 'C') {
+      temp = Math.round(temp);
+    }
+    else {
+      temp =  Math.round((temp * 9/5) +32);
+    }
+    return temp;
+  },
+
   render : function() {
 
     return (
@@ -149,11 +159,10 @@ var Forekast = React.createClass({
         <div className="forekast">
           <LoadingScreen isLoading={this.state.isLoading} />
           <UnitToggle tempUnit={this.state.tempUnit} isLoading={this.state.isLoading} selectUnit={this.selectUnit} />
-          <NowForekast weatherData={this.state.weatherData} tempUnit={this.state.tempUnit} isLoading={this.state.isLoading} city={this.state.city} />
-          <WeatherInfos weatherData={this.state.weatherData}  tempUnit={this.state.tempUnit} isLoading={this.state.isLoading} />
-          <HoursForekast weatherData={this.state.weatherData} tempUnit={this.state.tempUnit} isLoading={this.state.isLoading}  />
-
-          <DaysForekast weatherData={this.state.weatherData} tempUnit={this.state.tempUnit} isLoading={this.state.isLoading} city={this.state.city} />
+          <NowForekast displayTemp={this.displayTemp} weatherData={this.state.weatherData} tempUnit={this.state.tempUnit} isLoading={this.state.isLoading} city={this.state.city} />
+          <WeatherInfos displayTemp={this.displayTemp} weatherData={this.state.weatherData}  tempUnit={this.state.tempUnit} isLoading={this.state.isLoading} />
+          <HoursForekast displayTemp={this.displayTemp} weatherData={this.state.weatherData} tempUnit={this.state.tempUnit} isLoading={this.state.isLoading}  />
+          <DaysForekast displayTemp={this.displayTemp} weatherData={this.state.weatherData} tempUnit={this.state.tempUnit} isLoading={this.state.isLoading} city={this.state.city} />
           <Footer isLoading={this.state.isLoading} />
         </div>
 
@@ -208,8 +217,8 @@ var NowForekast = React.createClass({
 
     var isLoading = this.props.isLoading;
     if (!isLoading) {
-      let data = this.props.weatherData;
-      let city = this.props.city;
+      var data = this.props.weatherData;
+      var city = this.props.city;
 
       return (
         <section className="weather-now">
@@ -221,7 +230,7 @@ var NowForekast = React.createClass({
               <img src={params.iconPath+data.currently.icon+".svg"} alt={h.transformIconName(data.currently.icon)} />
             </div>
             <div className="weather-now__wrapper">
-              <div className="weather-now__temperature">{Math.round(data.currently.temperature)}<sup>°</sup></div>
+              <div className="weather-now__temperature">{this.props.displayTemp(data.currently.temperature)}<sup>°</sup></div>
             </div>
 
             <div className="summary">
@@ -250,7 +259,7 @@ var HoursForekast = React.createClass({
         <div className="hour">{h.hoursClean(hour.getHours())}</div>
         <img src={params.iconPath+hourData.icon+".svg"}  alt={h.transformIconName(hourData.icon)} />
 
-        <div className="temp">{Math.round(hourData.temperature)}°</div>
+        <div className="temp">{this.props.displayTemp(hourData.temperature)}°</div>
       </li>
     )
   },
@@ -288,7 +297,7 @@ var DaysForekast = React.createClass({
         <div className="day">{h.capsFirstLetter(day.dateTime.format('dddd'))}</div>
         <img src={params.iconPath+day.icon+".svg"} alt={h.transformIconName(day.icon)} className="icon" />
         <div className="temp">
-          <span className="temp-max">{Math.round(day.temperatureMax)}°</span><span className="temp-min">{Math.round(day.temperatureMin)}°</span>
+          <span className="temp-max">{this.props.displayTemp(day.temperatureMax)}°</span><span className="temp-min">{this.props.displayTemp(day.temperatureMin)}°</span>
         </div>
       </li>
     )
@@ -332,12 +341,12 @@ var WeatherInfos = React.createClass({
 
             <h2>
               Aujourd'hui
-              <span className="today-max">{Math.round(data.daily.data[0].temperatureMax)}°</span> <span className="separator">→</span>
-              <span className="today-min">{Math.round(data.daily.data[0].temperatureMin)}°</span>
+              <span className="today-max">{this.props.displayTemp(data.daily.data[0].temperatureMax)}°</span> <span className="separator">→</span>
+              <span className="today-min">{this.props.displayTemp(data.daily.data[0].temperatureMin)}°</span>
             </h2>
 
             <div className="group">
-              <div>Température :</div><div>{Math.round(data.currently.temperature)}<sup>°</sup><span className="Unit">{this.props.tempUnit}</span></div>
+              <div>Température :</div><div>{this.props.displayTemp(data.currently.temperature)}<sup>°</sup><span className="Unit">{this.props.tempUnit}</span></div>
               <div>Indice UV :</div><div>{data.currently.uvIndex}</div>
             </div>
 

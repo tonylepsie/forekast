@@ -50,7 +50,7 @@ const conf = {
 */
 
 gulp.task('styles',function() {
-  
+
   // move over fonts
   gulp.src('assets/fonts/**.*')
     .pipe(gulp.dest(conf.buildPath+'fonts'))
@@ -78,7 +78,7 @@ gulp.task('images',function(){
 
 /*
   Browser Sync
-
+*/
 gulp.task('browser-sync', function() {
     browserSync({
         server : {},
@@ -86,7 +86,7 @@ gulp.task('browser-sync', function() {
         ghostMode: false
     });
 });
-*/
+
 
 gulp.task('watchify', function () {
   var args = merge(watchify.args, { debug: true });
@@ -126,7 +126,7 @@ function handleErrors() {
 }
 
 //'browser-sync',
-gulp.task('default', ['images','styles', 'watchify'], function() {
+gulp.task('default', ['images','styles', 'watchify', 'browser-sync'], function() {
   gulp.watch(conf.scssPath+'*.scss', ['styles']); // gulp watch for stylus changes
   //gulp.watch(conf.scriptsPath+'*.js', ['watchify']);
 });

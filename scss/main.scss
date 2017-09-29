@@ -180,6 +180,7 @@ section {
 	top: 0;
 	left: 0;
 	position: fixed;
+  opacity: .7;
 	background: url(../images/drops.png) left top no-repeat;
 	background-attachment: fixed;
 	background-size: contain;
@@ -259,17 +260,18 @@ section {
 
 .unit-toggle {
 	position: absolute;
-	top: 1rem;
-	right: 1rem;
+	top: 1.2rem;
+	right: 1.2rem;
+  font-weight: 300;
+  font-size: 1.1rem;
 	a, span {
-		font-size: .9rem;
 		color: $lightgrey;
 		text-decoration: none;
 		&:hover {
 
 		}
 		&.selected {
-			font-size: 500;
+			font-weight: 300;
 			color: #fff;
 		}
 	}
