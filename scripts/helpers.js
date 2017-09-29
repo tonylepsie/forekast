@@ -10,6 +10,9 @@ let helpers =  {
   transformIconName: function(icon) {
     return this.replaceAll(icon.toUpperCase(),'-','_');
   },
+  celciusToFarenheit: function(temp) {
+    return temp;
+  },
   capsFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   },

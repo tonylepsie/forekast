@@ -146,8 +146,6 @@ var Forekast = React.createClass({
     return (
       <div className={'forekast__wrapper '+this.state.currentIcon}>
 
-        {/*<img src="http://pngimg.com/uploads/cloud/cloud_PNG16.png"  /> */}
-
         <div className="forekast">
           <LoadingScreen isLoading={this.state.isLoading} />
           <UnitToggle tempUnit={this.state.tempUnit} isLoading={this.state.isLoading} selectUnit={this.selectUnit} />
@@ -220,7 +218,7 @@ var NowForekast = React.createClass({
             <div className="weather-now__summary">{data.currently.summary}</div>
 
             <div className="weather-now__icon-wrapper">
-              <img src={params.iconPath+data.currently.icon+".svg"} />
+              <img src={params.iconPath+data.currently.icon+".svg"} alt={h.transformIconName(data.currently.icon)} />
             </div>
             <div className="weather-now__wrapper">
               <div className="weather-now__temperature">{Math.round(data.currently.temperature)}<sup>°</sup></div>
@@ -245,12 +243,12 @@ var HoursForekast = React.createClass({
     var hour = new Date();
     hour.setTime(hourData.time*1000);
 
-    if (index > maxHours) return;
+    if (index === 0 || index > maxHours) return;
 
     return(
       <li key={'day-'+index}>
         <div className="hour">{h.hoursClean(hour.getHours())}</div>
-        <img src={params.iconPath+hourData.icon+".svg"} />
+        <img src={params.iconPath+hourData.icon+".svg"}  alt={h.transformIconName(hourData.icon)} />
 
         <div className="temp">{Math.round(hourData.temperature)}°</div>
       </li>
@@ -287,10 +285,10 @@ var DaysForekast = React.createClass({
     if (index === 0 || index > maxDays) return;
     return(
       <li key={'day-'+index}>
-        <img src={params.iconPath+day.icon+".svg"} />
-        <div>{h.capsFirstLetter(day.dateTime.format('dddd'))}</div>
-        <div>
-          <span className="temp-min">{Math.round(day.temperatureMin)}°</span> | <span className="temp-max">{Math.round(day.temperatureMax)}°</span>
+        <div className="day">{h.capsFirstLetter(day.dateTime.format('dddd'))}</div>
+        <img src={params.iconPath+day.icon+".svg"} alt={h.transformIconName(day.icon)} className="icon" />
+        <div className="temp">
+          <span className="temp-max">{Math.round(day.temperatureMax)}°</span><span className="temp-min">{Math.round(day.temperatureMin)}°</span>
         </div>
       </li>
     )
@@ -371,7 +369,7 @@ var Footer = React.createClass({
     if (!isLoading) {
       return (
       <footer>
-        <a href="https://darksky.net/poweredby/" target="_blank">Powered by Dark Sky</a> - Icons by <a href="http://www.yihsuanlu.com/" target="_blank">Yihsuan Lu </a>
+        <a href="https://darksky.net/poweredby/" target="_blank">Powered by Dark Sky</a> - Icons by <a href="http://www.alessioatzeni.com/meteocons/" target="_blank">Alessio Atzeni</a>
       </footer>
       )
     } else return null;
