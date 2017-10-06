@@ -126,7 +126,7 @@ function handleErrors() {
 }
 
 //'browser-sync',
-gulp.task('default', ['images','styles', 'watchify', 'browser-sync'], function() {
+gulp.task('default', ['images','styles', 'watchify'], function() {
   gulp.watch(conf.scssPath+'*.scss', ['styles']); // gulp watch for stylus changes
   //gulp.watch(conf.scriptsPath+'*.js', ['watchify']);
 });

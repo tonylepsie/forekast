@@ -472,6 +472,7 @@ body {
   font-family: 'Oxygen', sans-serif;
   font-size: 62.5%;
   text-shadow: 1px 1px 1px rgba(51, 51, 51, 0.4);
+  height: 100%;
   min-height: 100%;
   letter-spacing: .03rem;
 }
@@ -483,11 +484,6 @@ h1 {
 
 .hidden {
   display: none;
-}
-
-.imgshadow, .weather-now .weather-now__icon-wrapper img, .weather-by-hours__list li img, .weather-by-days_list li .icon {
-  -webkit-filter: drop-shadow(1px 1px 1px rgba(51, 51, 51, 0.4));
-          filter: drop-shadow(1px 1px 1px rgba(51, 51, 51, 0.4));
 }
 
 #main {
@@ -531,7 +527,6 @@ section h2 span.today-min {
   background-image: radial-gradient(white, rgba(255, 255, 255, 0.2) 2px, transparent 10px), radial-gradient(white, rgba(255, 255, 255, 0.15) 1px, transparent 12px), radial-gradient(white, rgba(255, 255, 255, 0.1) 2px, transparent 15px), radial-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1) 2px, transparent 8px);
   background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
   background-position: 0 0, 4rem 6rem, 13rem 27rem, 70px 100px;
-  z-index: -2;
 }
 
 .clouds, .cloud1, .forekast__wrapper.cloudy::after, .forekast__wrapper.partly-cloudy-day::after, .forekast__wrapper.partly-cloudy-night::after, .forekast__wrapper.fog::after {
@@ -547,7 +542,6 @@ section h2 span.today-min {
   background-size: contain;
   background-position: left top;
   background-repeat: no-repeat;
-  z-index: -1;
 }
 
 .cloud1, .forekast__wrapper.cloudy::after, .forekast__wrapper.partly-cloudy-day::after, .forekast__wrapper.partly-cloudy-night::after, .forekast__wrapper.fog::after {
@@ -555,8 +549,8 @@ section h2 span.today-min {
 }
 
 .drops, .forekast__wrapper.rain::after {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   display: block;
   content: ' ';
   top: 0;
@@ -568,20 +562,23 @@ section h2 span.today-min {
   background-size: contain;
   background-position: left top;
   background-repeat: no-repeat;
-  z-index: -1;
 }
 
 .forekast__wrapper {
   max-width: 700px;
   background: #fff;
-  width: 100vw;
-  height: 100vh;
-  transition: all 1.3s ease;
+  width: 100%;
+  height: 100%;
+  transition: all .5s ease;
   overflow-y: scroll;
   /* has to be scroll, not auto */
   -webkit-overflow-scrolling: touch;
-  position: fixed;
   background-attachment: fixed;
+}
+
+.forekast__wrapper::after {
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
 }
 
 .forekast__wrapper.rain {
@@ -613,6 +610,10 @@ section h2 span.today-min {
   background-image: linear-gradient(#aaa, #ddd);
 }
 
+.forekast {
+  position: relative;
+}
+
 .forekast::after {
   clear: both;
   content: "";
@@ -625,11 +626,13 @@ section h2 span.today-min {
   right: 1.2rem;
   font-weight: 300;
   font-size: 1.1rem;
+  z-index: 10;
 }
 
 .unit-toggle a, .unit-toggle span {
   color: #ccc;
   text-decoration: none;
+  margin: 0 .08rem;
 }
 
 .unit-toggle a.selected, .unit-toggle span.selected {
@@ -704,10 +707,9 @@ section h2 span.today-min {
 }
 
 .forekastLoader {
-  width: 20%;
-  position: absolute;
-  top: 40%;
-  left: 40%;
+  position: fixed;
+  top: calc(50% - 32px);
+  left: calc(50% - 32px);
 }
 
 .summary {
@@ -723,6 +725,7 @@ section h2 span.today-min {
   width: 100%;
   overflow-x: scroll;
   overflow-y: auto;
+  overflow: -moz-scrollbars-none;
 }
 
 .weather-by-hours__list::-webkit-scrollbar {
@@ -792,7 +795,6 @@ section h2 span.today-min {
   width: 33.3%;
   height: 2.2rem;
   padding: 5px 0;
-  float: right;
 }
 
 .weather-by-days_list li .temp {

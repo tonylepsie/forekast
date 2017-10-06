@@ -6,6 +6,9 @@ import moment from 'moment';
 require('moment/locale/fr');
 import h from './helpers';
 
+import Footer from './components/Footer';
+import LoadingScreen from './components/LoadingScreen';
+
 DarkSkyApi.apiKey = '4800f3aa10abd73d632df6561bf097b1';
 DarkSkyApi.units = 'si'; // default 'us'
 DarkSkyApi.language = 'fr'; // default 'en'
@@ -71,20 +74,8 @@ var Forekast = React.createClass({
       weatherData: this.state.weatherData,
       currentIcon: this.state.currentIcon
     });
-
   },
-  /*
-  registerWeeklyData: function(weatherWeeklyData) {
 
-    this.state.weatherWeeklyData = weatherWeeklyData;
-
-    console.log(weatherWeeklyData);
-    this.setState({
-      isLoading: this.state.isLoading,
-      weatherWeeklyData: this.state.weatherWeeklyData
-    });
-  },
-  */
   selectUnit: function(unit) {
     if (unit !== this.state.tempUnit) {
       this.state.tempUnit = unit;
@@ -113,6 +104,7 @@ var Forekast = React.createClass({
       })
       .catch(function (error) {
         console.log(error);
+        // todo : displayError(error);
       });
 
   },
@@ -171,19 +163,7 @@ var Forekast = React.createClass({
   }
 })
 
-var LoadingScreen = React.createClass({
-  render : function() {
 
-    var isLoading = this.props.isLoading;
-    if (isLoading) {
-      return (
-          <div className="forekastLoader">
-            <img src="build/images/loading.gif" />
-          </div>
-      )
-    } else return null;
-  }
-})
 
 var UnitToggle = React.createClass({
   isUnitSelected: function(unit) {
@@ -372,17 +352,5 @@ var WeatherInfos = React.createClass({
   }
 })
 
-var Footer = React.createClass({
-  render: function() {
-    let isLoading = this.props.isLoading;
-    if (!isLoading) {
-      return (
-      <footer>
-        <a href="https://darksky.net/poweredby/" target="_blank">Powered by Dark Sky</a> - Icons by <a href="http://www.alessioatzeni.com/meteocons/" target="_blank">Alessio Atzeni</a>
-      </footer>
-      )
-    } else return null;
-  }
-})
 
 ReactDOM.render(React.createElement(Forekast), document.querySelector('#main'));

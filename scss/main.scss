@@ -81,6 +81,7 @@ body {
   font-family: 'Oxygen', sans-serif;
   font-size: 62.5%;
   text-shadow: 1px 1px 1px rgba(51,51,51,.4);
+  height: 100%;
 	min-height: 100%;
 	letter-spacing: .03rem;
 }
@@ -100,7 +101,7 @@ $lightgrey: #ccc;
 
 
 .imgshadow {
-	filter: drop-shadow(1px 1px 1px rgba(51,51,51,.4));
+	//filter: drop-shadow(1px 1px 1px rgba(51,51,51,.4));
 }
 
 
@@ -148,7 +149,6 @@ section {
 	radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 8px);
 	background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
 	background-position: 0 0, 4rem 6rem, 13rem 27rem, 70px 100px;
-	z-index: -2;
 }
 
 .clouds {
@@ -164,7 +164,6 @@ section {
 	background-size: contain;
 	background-position: left top;
 	background-repeat: no-repeat;
-	z-index: -1;
 }
 
 .cloud1 {
@@ -173,8 +172,8 @@ section {
 }
 
 .drops {
-	width: 100%;
-	height: 100%;
+  width: 100vw;
+	height: 100vh;
 	display: block;
 	content: ' ';
 	top: 0;
@@ -186,19 +185,21 @@ section {
 	background-size: contain;
 	background-position: left top;
 	background-repeat: no-repeat;
-	z-index: -1;
 }
 
 .forekast__wrapper {
 	max-width:  700px;
   background: #fff;
-	width: 100vw;
-  height: 100vh;
-  transition: all 1.3s ease;
+	width: 100%;
+  height: 100%;
+  transition: all .5s ease;
 	overflow-y: scroll; /* has to be scroll, not auto */
   -webkit-overflow-scrolling: touch;
-	position: fixed;
+	//position: fixed;
 	background-attachment: fixed;
+  &::after {
+    transform: translate3d(0,0,0);
+  }
 
   &.rain {
     background: linear-gradient(to top, #e6dada, #274046);
@@ -256,6 +257,7 @@ section {
 
 .forekast {
 	@include grid-container;
+  position: relative;
 }
 
 .unit-toggle {
@@ -264,9 +266,11 @@ section {
 	right: 1.2rem;
   font-weight: 300;
   font-size: 1.1rem;
+  z-index: 10;
 	a, span {
 		color: $lightgrey;
 		text-decoration: none;
+    margin: 0 .08rem;
 		&:hover {
 
 		}
@@ -301,7 +305,7 @@ section {
 		img {
 			float: right;
 			width: 9rem;
-			@extend .imgshadow;
+			//@extend .imgshadow;
 		}
   }
   .weather-now__wrapper {
@@ -327,10 +331,9 @@ section {
 }
 
 .forekastLoader {
-  width: 20%;
-  position: absolute;
-  top: 40%;
-  left: 40%;
+  position: fixed;
+  top: calc(50% - 32px);
+  left: calc(50% - 32px);
 }
 
 
@@ -347,8 +350,9 @@ section {
 	width: 100%;
   overflow-x: scroll;
   overflow-y: auto;
+  overflow: -moz-scrollbars-none;
 
-	&::-webkit-scrollbar {
+  &::-webkit-scrollbar {
 	    display: none;
 	}
 
@@ -364,7 +368,7 @@ section {
 		padding-bottom: 3px;
 		img {
 			width: 1.8rem;
-			@extend .imgshadow;
+			//@extend .imgshadow;
 			padding: 5px 0;
 		}
 		div {
@@ -401,10 +405,10 @@ section {
 		}
 		.icon {
 			width: 33.3%;
-			@extend .imgshadow;
+			//@extend .imgshadow;
 			height: 2.2rem;
 			padding: 5px 0;
-			float: right;
+			//float: right;
 		}
 		.temp {
 			width: 33.3%;
