@@ -1,7 +1,8 @@
 import React from 'react';
 
-var LoadingScreen = React.createClass({
-  render : function() {
+class LoadingScreen extends React.Component{
+
+  render() {
 
     var isLoading = this.props.isLoading;
     if (isLoading) {
@@ -12,6 +13,7 @@ var LoadingScreen = React.createClass({
       )
     } else return null;
   }
-})
+  
+}
 
 export default LoadingScreen;

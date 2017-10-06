@@ -20,10 +20,14 @@ DarkSkyApi.language = 'fr'; // default 'en'
 
 moment.locale('fr');
 
+class Forekast extends React.Component {
 
-var Forekast = React.createClass({
-  getInitialState : function () {
-    return {
+  constructor () {
+    super();
+
+    this.displayTemp = this.displayTemp.bind(this);
+    this.selectUnit = this.selectUnit.bind(this);
+    this.state = {
       isLoading: true,
       tempUnit: 'C',
       weatherData: {},
@@ -34,9 +38,9 @@ var Forekast = React.createClass({
         lon: ''
       }
     }
-  },
+  }
 
-  componentWillMount: function() {
+  componentWillMount() {
 
     var options = {
       enableHighAccuracy: true,
@@ -45,14 +49,14 @@ var Forekast = React.createClass({
     };
 
     if(navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.geoSuccess, this.geoError, options);
+      navigator.geolocation.getCurrentPosition(this.geoSuccess.bind(this), this.geoError, options);
     } else {
       alert('no geo');
     }
 
-  },
+  }
 
-  registerData: function(weatherData) {
+  registerData(weatherData) {
     console.log(weatherData);
 
     this.state.weatherData = weatherData;
@@ -63,9 +67,9 @@ var Forekast = React.createClass({
       weatherData: this.state.weatherData,
       currentIcon: this.state.currentIcon
     });
-  },
+  }
 
-  selectUnit: function(unit) {
+  selectUnit(unit) {
     if (unit !== this.state.tempUnit) {
       this.state.tempUnit = unit;
       this.setState({
@@ -74,17 +78,17 @@ var Forekast = React.createClass({
       return;
     }
     else return;
-  },
+  }
 
-  setCity: function(city) {
+  setCity(city) {
     this.state.city = city;
     this.setState({
       city : this.state.city,
       currentIcon: this.state.currentIcon
     });
-  },
+  }
 
-  getLocality: function() {
+  getLocality() {
     var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+this.state.geo.lat+","+this.state.geo.lon;
     var that = this;
     axios.get(url)
@@ -95,14 +99,14 @@ var Forekast = React.createClass({
         console.log(error);
         // todo : displayError(error);
       });
+  }
 
-  },
-
-  geoSuccess: function(args) {
+  geoSuccess(args) {
     const position = {
       latitude: args.coords.latitude,
       longitude: args.coords.longitude
     };
+
     this.state.geo.lat = args.coords.latitude;
     this.state.geo.lon = args.coords.longitude;
 
@@ -118,11 +122,13 @@ var Forekast = React.createClass({
       .then(
         result => this.registerData(result)
       );
-  },
-  geoError: function(args) {
+  }
+
+  geoError(args) {
     console.log(args);
-  },
-  displayTemp: function(temp) {
+  }
+
+  displayTemp(temp) {
     if (this.state.tempUnit === 'C') {
       temp = Math.round(temp);
     }
@@ -130,10 +136,9 @@ var Forekast = React.createClass({
       temp =  Math.round((temp * 9/5) +32);
     }
     return temp;
-  },
+  }
 
-  render : function() {
-
+  render() {
     return (
       <div className={'forekast__wrapper '+this.state.currentIcon}>
 
@@ -150,6 +155,7 @@ var Forekast = React.createClass({
       </div>
     )
   }
-})
+
+}
 
 export default Forekast;

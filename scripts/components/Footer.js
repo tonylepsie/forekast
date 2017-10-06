@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-var Footer = React.createClass({
-  render: function() {
+class Footer extends React.Component{
+
+  render() {
     let isLoading = this.props.isLoading;
     if (!isLoading) {
       return (
@@ -12,6 +13,7 @@ var Footer = React.createClass({
       )
     } else return null;
   }
-})
+  
+}
 
 export default Footer;

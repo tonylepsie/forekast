@@ -1,9 +1,9 @@
 import React from 'react';
 import params from './params';
 
-var WeatherInfos = React.createClass({
-  render : function() {
+class WeatherInfos extends React.Component{
 
+  render() {
     var isLoading = this.props.isLoading;
     if (!isLoading) {
       var data = this.props.weatherData;
@@ -41,6 +41,7 @@ var WeatherInfos = React.createClass({
     }
     else return null;
   }
-})
+  
+}
 
 export default WeatherInfos;

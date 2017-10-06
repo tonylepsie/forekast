@@ -2,9 +2,14 @@ import React from 'react';
 import params from './params';
 import h from '../helpers';
 
-var HoursForekast = React.createClass({
+class HoursForekast extends React.Component {
 
-  renderHour: function(hourData, index) {
+  constructor (props) {
+    super(props);
+    this.renderHour = this.renderHour.bind(this);
+  }
+
+  renderHour(hourData, index) {
     var maxHours = 20;
 
     var hour = new Date();
@@ -20,9 +25,9 @@ var HoursForekast = React.createClass({
         <div className="temp">{this.props.displayTemp(hourData.temperature)}°</div>
       </li>
     )
-  },
+  }
 
-  render: function() {
+  render() {
     var isLoading = this.props.isLoading;
     var hourlyData = this.props.weatherData.hourly;
     if (!isLoading) {
@@ -42,6 +47,7 @@ var HoursForekast = React.createClass({
       );
     } else return null;
   }
-})
+
+}
 
 export default HoursForekast;

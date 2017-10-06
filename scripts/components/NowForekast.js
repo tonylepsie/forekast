@@ -2,10 +2,13 @@ import React from 'react';
 import params from './params';
 import h from '../helpers';
 
-var NowForekast = React.createClass({
+class NowForekast extends React.Component {
 
-  render : function() {
+  constructor (props) {
+    super(props);
+  }
 
+  render() {
     var isLoading = this.props.isLoading;
     if (!isLoading) {
       var data = this.props.weatherData;
@@ -33,6 +36,7 @@ var NowForekast = React.createClass({
     }
     else return null;
   }
-})
+
+}
 
 export default NowForekast;

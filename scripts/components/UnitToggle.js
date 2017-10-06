@@ -1,19 +1,20 @@
 import React from 'react';
 
-var UnitToggle = React.createClass({
-  isUnitSelected: function(unit) {
+class UnitToggle extends React.Component{
+  isUnitSelected(unit) {
     if (unit === this.state.currentUnit) {
       return 'selected';
     }
     else return;
-  },
+  }
 
-  displayUnit: function(unit) {
+  displayUnit(unit) {
     return (
       <a href="#" className={unit === this.props.tempUnit ? 'selected' : ''} onClick={this.props.selectUnit.bind(null, unit)}>{unit}</a>
     )
-  },
-  render : function() {
+  }
+
+  render() {
     let isLoading = this.props.isLoading;
     if (!isLoading) {
       return (
@@ -24,6 +25,7 @@ var UnitToggle = React.createClass({
       )
     } else return null;
   }
-})
+
+}
 
 export default UnitToggle;

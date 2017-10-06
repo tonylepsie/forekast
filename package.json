@@ -2,7 +2,8 @@
   "name": "Forekast",
   "version": "1.0.0",
   "description": "Simple forecast app using React",
-  "main": "index.js",
+  "main": "index.html",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -34,9 +35,9 @@
     "moment": "^2.18.1",
     "neat": "^1.2.2",
     "node-neat": "^2.0.0-beta.0",
-    "react": "15.6.2",
+    "react": "16.0.0",
     "react-catalyst": "0.3.0",
-    "react-dom": "15.6.1",
+    "react-dom": "16.0.0",
     "react-mixin": "3.0.0",
     "react-router": "4.2.0",
     "utils-merge": "1.0.0",

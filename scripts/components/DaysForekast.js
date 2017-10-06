@@ -2,11 +2,18 @@ import React from 'react';
 import params from './params';
 import h from '../helpers';
 
-var DaysForekast = React.createClass({
-  renderDay: function (day, index) {
+class DaysForekast extends React.Component {
+
+  constructor (props) {
+    super(props);
+    this.renderDay = this.renderDay.bind(this);
+  }
+
+  renderDay(day, index) {
     var canvasSize = 35;
     var maxDays = 10;
     if (index === 0 || index > maxDays) return;
+
     return(
       <li key={'day-'+index}>
         <div className="day">{h.capsFirstLetter(day.dateTime.format('dddd'))}</div>
@@ -16,10 +23,9 @@ var DaysForekast = React.createClass({
         </div>
       </li>
     )
-  },
+  }
 
-  render: function() {
-
+  render() {
     let weeklyData = this.props.weatherData.daily;
     let isLoading = this.props.isLoading;
 
@@ -42,6 +48,6 @@ var DaysForekast = React.createClass({
       );
     } else return null;
   }
-})
+}
 
 export default DaysForekast;
