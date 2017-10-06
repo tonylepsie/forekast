@@ -2,7 +2,7 @@
 
 
 
-class location (
+class location {
 
   constructor() {
     var options = {
@@ -27,9 +27,9 @@ class location (
     console.warn(`ERROR(${err.code}): ${err.message}`);
   }
 
+}
 
-
-)
+export default location;
 
 
 /*
