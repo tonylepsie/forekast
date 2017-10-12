@@ -42,23 +42,15 @@ class Forekast extends React.Component {
 
   componentWillMount() {
 
-    var options = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0
-    };
-
     if(navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.geoSuccess.bind(this), this.geoError, options);
+      navigator.geolocation.getCurrentPosition(this.geoSuccess.bind(this), this.geoError, params.geoOptions);
     } else {
-      alert('no geo');
+      //alert('no geo');
+      //todo : displayError(error);
     }
-
   }
 
   registerData(weatherData) {
-    console.log(weatherData);
-
     this.state.weatherData = weatherData;
     this.state.currentIcon = weatherData.currently.icon;
     this.state.isLoading = false;
@@ -75,9 +67,7 @@ class Forekast extends React.Component {
       this.setState({
         tempUnit: this.state.tempUnit
       });
-      return;
     }
-    else return;
   }
 
   setCity(city) {
