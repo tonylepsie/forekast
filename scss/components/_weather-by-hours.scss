@@ -1,0 +1,35 @@
+.weather-by-hours__list {
+	height: 5rem;
+	width: 100%;
+  overflow-x: scroll;
+  overflow-y: auto;
+  overflow: -moz-scrollbars-none;
+
+  &::-webkit-scrollbar {
+	    display: none;
+	}
+
+	ul {
+		list-style-type: none;
+		white-space: nowrap;
+	}
+
+	li {
+		width: 13.5%;
+		display: inline-block;
+		text-align: center;
+		padding-bottom: 3px;
+		img {
+			width: 1.8rem;
+			//@extend .imgshadow;
+			padding: 5px 0;
+		}
+		div {
+			padding-top: .3rem;
+			font-size: .7rem;
+			.temp-min {
+				color: $lightgrey;
+			}
+		}
+	}
+}

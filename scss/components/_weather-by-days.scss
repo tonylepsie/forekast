@@ -1,0 +1,40 @@
+.weather-by-days_list {
+	padding-top: 1rem;
+
+	ul {
+		list-style-type: none;
+	}
+
+	li {
+		width: 100%;
+		display: flex;
+		flex-wrap: nowrap;
+		justify-content: space-between;
+		align-content: center;
+		align-items: center;
+		line-height: 2.2rem;
+		font-size: .9rem;
+		font-weight: 300;
+		.day {
+			width: 33%;
+			padding-left: .7rem;
+		}
+		.icon {
+			width: 33.3%;
+			//@extend .imgshadow;
+			height: 2.2rem;
+			padding: 5px 0;
+			//float: right;
+		}
+		.temp {
+			width: 33.3%;
+			float: right;
+			padding-right: .7rem;
+			text-align: right;
+			.temp-min {
+				margin-left: 1rem;
+				color: $lightgrey;
+			}
+		}
+	}
+}

@@ -1,0 +1,21 @@
+.weather-infos {
+  text-align: center;
+  font-size: .8rem;
+  font-weight: 300;
+
+	.group {
+		margin-bottom: 1rem;
+		@include grid-container;
+	}
+
+  .group div {
+    @include grid-column(6);
+    padding: .2rem;
+    &:nth-child(odd) {
+      text-align: right;
+    }
+    &:nth-child(even) {
+      text-align: left;
+    }
+  }
+}
