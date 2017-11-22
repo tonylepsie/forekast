@@ -122,11 +122,11 @@ function handleErrors() {
     title: 'Compile Error',
     message: '<%= error.message %>'
   }).apply(this, args);
-  this.emit('end'); // Keep gulp from hanging on this task
+  this.emit('end'); 
 }
 
 //'browser-sync',
 gulp.task('default', ['images','styles', 'watchify'], function() {
-  gulp.watch(conf.scssPath+'*.scss', ['styles']); // gulp watch for stylus changes
+  gulp.watch(conf.scssPath+'*.scss', ['styles']); 
   //gulp.watch(conf.scriptsPath+'*.js', ['watchify']);
 });
